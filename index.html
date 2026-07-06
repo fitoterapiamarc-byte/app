@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CuerpoClaro</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <main class="app-shell">
+    <section id="legalScreen" class="legal-card">
+      <header class="app-header">
+        <div class="shield">🛡️</div>
+        <div>
+          <h1>Bienvenido a 🌿 CuerpoClaro</h1>
+          <p>Por favor, lee y acepta los términos legales antes de continuar</p>
+        </div>
+      </header>
+
+      <section class="legal-content" aria-label="Aviso legal">
+        <h2>🛡️ ⚖️ AVISO LEGAL Y LIMITACIÓN DE RESPONSABILIDAD</h2>
+
+        <h3>1. CARÁCTER ORIENTATIVO:</h3>
+        <p>Toda la información, análisis, diagnósticos orientativos y recomendaciones proporcionadas por esta aplicación tienen un carácter <strong>exclusivamente informativo y educativo</strong>. No constituyen asesoramiento médico profesional.</p>
+
+        <h3>2. NO SUSTITUYE CONSULTA MÉDICA:</h3>
+        <p>Esta aplicación <strong>NO reemplaza</strong> la evaluación, diagnóstico ni tratamiento por parte de profesionales sanitarios cualificados. Solo un profesional de la salud puede realizar un diagnóstico clínico válido.</p>
+
+        <h3>3. OBLIGACIÓN DE CONSULTAR A UN PROFESIONAL:</h3>
+        <p>Ante cualquier síntoma persistente, grave o que cause preocupación, debe acudir inmediatamente a un médico, centro de salud u hospital. <strong>NO se autodiagnostique ni se automedique</strong> basándose únicamente en esta aplicación.</p>
+
+        <h3>4. SITUACIONES DE EMERGENCIA:</h3>
+        <p>Si experimenta síntomas graves como dolor torácico, dificultad respiratoria severa, sangrado abundante, alteración del estado de consciencia, o cualquier otra emergencia médica, llame inmediatamente al <strong>112</strong> o acuda al servicio de urgencias más cercano.</p>
+
+        <h3>5. LIMITACIÓN DE RESPONSABILIDAD:</h3>
+        <p>Los desarrolladores y propietarios de esta aplicación no se responsabilizan por decisiones tomadas basándose en la información proporcionada, ni por consecuencias derivadas del uso o mal uso de esta herramienta. El usuario asume toda la responsabilidad por el uso de esta aplicación.</p>
+
+        <h3>6. TRATAMIENTOS Y MEDICACIÓN:</h3>
+        <p>No suspenda, modifique ni inicie ningún tratamiento médico, medicación, suplemento o terapia sin consultar previamente con un profesional sanitario cualificado.</p>
+
+        <h3>7. ACEPTACIÓN:</h3>
+        <p>Al pulsar “Acepto los Términos”, declara haber leído, entendido y aceptado este aviso legal.</p>
+      </section>
+
+      <footer class="legal-actions">
+        <button id="rejectBtn" class="btn btn-secondary">No Acepto</button>
+        <button id="acceptBtn" class="btn btn-primary">Acepto los Términos</button>
+      </footer>
+    </section>
+
+    <section id="homeScreen" class="home-card hidden">
+      <header class="home-header">
+        <h1>🌿 CuerpoClaro</h1>
+        <p>Herramienta orientativa de bienestar natural</p>
+      </header>
+
+      <div class="home-grid">
+        <button class="feature-card">📝 Nuevo análisis</button>
+        <button class="feature-card">🌱 Recomendaciones</button>
+        <button class="feature-card">📚 Biblioteca natural</button>
+        <button class="feature-card">⚙️ Ajustes</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
