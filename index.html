@@ -49,17 +49,70 @@
       </footer>
     </section>
 
-    <section id="homeScreen" class="home-card hidden">
-      <header class="home-header">
-        <h1>🌿 CuerpoClaro</h1>
-        <p>Herramienta orientativa de bienestar natural</p>
+    <section id="homeScreen" class="dashboard hidden">
+      <header class="topbar">
+        <div class="brand-block">
+          <h1>🌿 CuerpoClaro</h1>
+          <p>Escucha las señales de tu cuerpo</p>
+        </div>
       </header>
 
-      <div class="home-grid">
-        <button class="feature-card">📝 Nuevo análisis</button>
-        <button class="feature-card">🌱 Recomendaciones</button>
-        <button class="feature-card">📚 Biblioteca natural</button>
-        <button class="feature-card">⚙️ Ajustes</button>
+      <div class="dashboard-layout">
+        <aside class="sidebar">
+          <button class="nav-item active">⌂ <span>Inicio</span></button>
+          <button class="nav-item">▤ <span>Registro Diario</span></button>
+          <button class="nav-item">└ <span>Análisis</span></button>
+          <button class="nav-item">✦ <span>Recomendaciones</span></button>
+          <button class="nav-item">♙ <span>Perfil</span></button>
+          <button class="nav-item">▯ <span>Educación</span></button>
+        </aside>
+
+        <section class="main-panel">
+          <section class="welcome-card">
+            <h2>¡Hola Usuario! 👋</h2>
+            <p>Comienza tu viaje hacia una mejor salud registrando tus señales corporales.</p>
+          </section>
+
+          <section class="stats-grid">
+            <article class="stat-card">
+              <div class="stat-icon orange">⌁</div>
+              <p>Energía</p>
+              <strong>0<span>/10</span></strong>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon pink">♡</div>
+              <p>Estado de Ánimo</p>
+              <strong>0<span>/10</span></strong>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon blue">♢</div>
+              <p>Digestión</p>
+              <strong>0<span>/10</span></strong>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon purple">☾</div>
+              <p>Sueño</p>
+              <strong>0<span>/10</span></strong>
+            </article>
+          </section>
+
+          <section class="warning-banner">
+            <strong>🛡️ ⚖️ AVISO LEGAL IMPORTANTE</strong>
+            <p>La información proporcionada es <b>exclusivamente orientativa y educativa.</b> NO sustituye la consulta médica profesional ni constituye diagnóstico clínico.</p>
+          </section>
+
+          <section class="tip-card">
+            <div class="tip-icon">💡</div>
+            <div>
+              <h3>💡 Consejo del Día</h3>
+              <p>💭 El mindfulness 10 min/día reduce actividad amígdala (centro del miedo) - comprobado por neuroimagen.</p>
+              <small>✨ Este consejo cambia cada día y está personalizado según tu perfil</small>
+            </div>
+          </section>
+        </section>
       </div>
     </section>
   </main>
