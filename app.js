@@ -1,3 +1,8 @@
+const dailyStyles = document.createElement('link');
+dailyStyles.rel = 'stylesheet';
+dailyStyles.href = 'daily.css';
+document.head.appendChild(dailyStyles);
+
 const legalScreen = document.getElementById('legalScreen');
 const homeScreen = document.getElementById('homeScreen');
 const acceptBtn = document.getElementById('acceptBtn');
