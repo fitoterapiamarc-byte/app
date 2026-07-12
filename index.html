@@ -20,25 +20,18 @@
 
       <section class="legal-content" aria-label="Aviso legal">
         <h2>🛡️ ⚖️ AVISO LEGAL Y LIMITACIÓN DE RESPONSABILIDAD</h2>
-
         <h3>1. CARÁCTER ORIENTATIVO:</h3>
         <p>Toda la información, análisis, diagnósticos orientativos y recomendaciones proporcionadas por esta aplicación tienen un carácter <strong>exclusivamente informativo y educativo</strong>. No constituyen asesoramiento médico profesional.</p>
-
         <h3>2. NO SUSTITUYE CONSULTA MÉDICA:</h3>
         <p>Esta aplicación <strong>NO reemplaza</strong> la evaluación, diagnóstico ni tratamiento por parte de profesionales sanitarios cualificados. Solo un profesional de la salud puede realizar un diagnóstico clínico válido.</p>
-
         <h3>3. OBLIGACIÓN DE CONSULTAR A UN PROFESIONAL:</h3>
         <p>Ante cualquier síntoma persistente, grave o que cause preocupación, debe acudir inmediatamente a un médico, centro de salud u hospital. <strong>NO se autodiagnostique ni se automedique</strong> basándose únicamente en esta aplicación.</p>
-
         <h3>4. SITUACIONES DE EMERGENCIA:</h3>
         <p>Si experimenta síntomas graves como dolor torácico, dificultad respiratoria severa, sangrado abundante, alteración del estado de consciencia, o cualquier otra emergencia médica, llame inmediatamente al <strong>112</strong> o acuda al servicio de urgencias más cercano.</p>
-
         <h3>5. LIMITACIÓN DE RESPONSABILIDAD:</h3>
         <p>Los desarrolladores y propietarios de esta aplicación no se responsabilizan por decisiones tomadas basándose en la información proporcionada, ni por consecuencias derivadas del uso o mal uso de esta herramienta. El usuario asume toda la responsabilidad por el uso de esta aplicación.</p>
-
         <h3>6. TRATAMIENTOS Y MEDICACIÓN:</h3>
         <p>No suspenda, modifique ni inicie ningún tratamiento médico, medicación, suplemento o terapia sin consultar previamente con un profesional sanitario cualificado.</p>
-
         <h3>7. ACEPTACIÓN:</h3>
         <p>Al pulsar “Acepto los Términos”, declara haber leído, entendido y aceptado este aviso legal.</p>
       </section>
@@ -59,59 +52,62 @@
 
       <div class="dashboard-layout">
         <aside class="sidebar">
-          <button class="nav-item active">⌂ <span>Inicio</span></button>
-          <button class="nav-item">▤ <span>Registro Diario</span></button>
-          <button class="nav-item">└ <span>Análisis</span></button>
-          <button class="nav-item">✦ <span>Recomendaciones</span></button>
-          <button class="nav-item">♙ <span>Perfil</span></button>
-          <button class="nav-item">▯ <span>Educación</span></button>
+          <button class="nav-item active" data-view="inicio">⌂ <span>Inicio</span></button>
+          <button class="nav-item" data-view="registro">▤ <span>Registro Diario</span></button>
+          <button class="nav-item" data-view="analisis">└ <span>Análisis</span></button>
+          <button class="nav-item" data-view="recomendaciones">✦ <span>Recomendaciones</span></button>
+          <button class="nav-item" data-view="perfil">♙ <span>Perfil</span></button>
+          <button class="nav-item" data-view="educacion">▯ <span>Educación</span></button>
         </aside>
 
         <section class="main-panel">
-          <section class="welcome-card">
-            <h2>¡Hola Usuario! 👋</h2>
-            <p>Comienza tu viaje hacia una mejor salud registrando tus señales corporales.</p>
-          </section>
+          <div id="inicioView" class="app-view">
+            <section class="welcome-card">
+              <h2>¡Hola Usuario! 👋</h2>
+              <p>Comienza tu viaje hacia una mejor salud registrando tus señales corporales.</p>
+            </section>
 
-          <section class="stats-grid">
-            <article class="stat-card">
-              <div class="stat-icon orange">⌁</div>
-              <p>Energía</p>
-              <strong>0<span>/10</span></strong>
-            </article>
+            <section class="stats-grid">
+              <article class="stat-card"><div class="stat-icon orange">⌁</div><p>Energía</p><strong id="energyStat">0<span>/10</span></strong></article>
+              <article class="stat-card"><div class="stat-icon pink">♡</div><p>Estado de Ánimo</p><strong id="moodStat">0<span>/10</span></strong></article>
+              <article class="stat-card"><div class="stat-icon blue">♢</div><p>Digestión</p><strong id="digestionStat">0<span>/10</span></strong></article>
+              <article class="stat-card"><div class="stat-icon purple">☾</div><p>Sueño</p><strong id="sleepStat">0<span>/10</span></strong></article>
+            </section>
 
-            <article class="stat-card">
-              <div class="stat-icon pink">♡</div>
-              <p>Estado de Ánimo</p>
-              <strong>0<span>/10</span></strong>
-            </article>
+            <section class="warning-banner">
+              <strong>🛡️ ⚖️ AVISO LEGAL IMPORTANTE</strong>
+              <p>La información proporcionada es <b>exclusivamente orientativa y educativa.</b> NO sustituye la consulta médica profesional ni constituye diagnóstico clínico.</p>
+            </section>
 
-            <article class="stat-card">
-              <div class="stat-icon blue">♢</div>
-              <p>Digestión</p>
-              <strong>0<span>/10</span></strong>
-            </article>
+            <section class="tip-card">
+              <div class="tip-icon">💡</div>
+              <div><h3>💡 Consejo del Día</h3><p>Dedica unos minutos a observar cómo te sientes y registra los cambios con sinceridad.</p><small>✨ El seguimiento diario ayuda a detectar patrones personales.</small></div>
+            </section>
+          </div>
 
-            <article class="stat-card">
-              <div class="stat-icon purple">☾</div>
-              <p>Sueño</p>
-              <strong>0<span>/10</span></strong>
-            </article>
-          </section>
+          <div id="registroView" class="app-view hidden">
+            <section class="section-card">
+              <div class="section-heading">
+                <div><h2>Registro diario</h2><p>Valora cómo te encuentras hoy del 0 al 10.</p></div>
+                <span id="todayDate" class="date-badge"></span>
+              </div>
 
-          <section class="warning-banner">
-            <strong>🛡️ ⚖️ AVISO LEGAL IMPORTANTE</strong>
-            <p>La información proporcionada es <b>exclusivamente orientativa y educativa.</b> NO sustituye la consulta médica profesional ni constituye diagnóstico clínico.</p>
-          </section>
+              <form id="dailyForm" class="daily-form">
+                <label class="range-card"><span>⚡ Energía</span><output id="energyValue">5</output><input id="energyInput" name="energy" type="range" min="0" max="10" value="5" /></label>
+                <label class="range-card"><span>♡ Estado de ánimo</span><output id="moodValue">5</output><input id="moodInput" name="mood" type="range" min="0" max="10" value="5" /></label>
+                <label class="range-card"><span>♢ Digestión</span><output id="digestionValue">5</output><input id="digestionInput" name="digestion" type="range" min="0" max="10" value="5" /></label>
+                <label class="range-card"><span>☾ Calidad del sueño</span><output id="sleepValue">5</output><input id="sleepInput" name="sleep" type="range" min="0" max="10" value="5" /></label>
 
-          <section class="tip-card">
-            <div class="tip-icon">💡</div>
-            <div>
-              <h3>💡 Consejo del Día</h3>
-              <p>💭 El mindfulness 10 min/día reduce actividad amígdala (centro del miedo) - comprobado por neuroimagen.</p>
-              <small>✨ Este consejo cambia cada día y está personalizado según tu perfil</small>
-            </div>
-          </section>
+                <label class="notes-field"><span>Notas del día</span><textarea id="notesInput" rows="5" maxlength="500" placeholder="Síntomas, comidas, actividad, estrés o cualquier cambio que hayas notado..."></textarea></label>
+                <div id="saveMessage" class="save-message" role="status"></div>
+                <button class="btn btn-primary save-button" type="submit">Guardar registro de hoy</button>
+              </form>
+            </section>
+          </div>
+
+          <div id="placeholderView" class="app-view hidden">
+            <section class="section-card placeholder-card"><h2 id="placeholderTitle">Próximamente</h2><p>Esta sección será la siguiente parte del programa.</p></section>
+          </div>
         </section>
       </div>
     </section>
