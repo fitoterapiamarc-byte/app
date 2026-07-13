@@ -88,17 +88,30 @@
           <div id="registroView" class="app-view hidden">
             <section class="section-card">
               <div class="section-heading">
-                <div><h2>Registro diario</h2><p>Valora cómo te encuentras hoy del 0 al 10.</p></div>
+                <div><h2>Registro diario</h2><p>Registra las señales principales de tu cuerpo. No es necesario rellenar los campos opcionales.</p></div>
                 <span id="todayDate" class="date-badge"></span>
               </div>
 
               <form id="dailyForm" class="daily-form">
+                <h3 class="form-section-title">Estado general</h3>
                 <label class="range-card"><span>⚡ Energía</span><output id="energyValue">5</output><input id="energyInput" name="energy" type="range" min="0" max="10" value="5" /></label>
                 <label class="range-card"><span>♡ Estado de ánimo</span><output id="moodValue">5</output><input id="moodInput" name="mood" type="range" min="0" max="10" value="5" /></label>
                 <label class="range-card"><span>♢ Digestión</span><output id="digestionValue">5</output><input id="digestionInput" name="digestion" type="range" min="0" max="10" value="5" /></label>
                 <label class="range-card"><span>☾ Calidad del sueño</span><output id="sleepValue">5</output><input id="sleepInput" name="sleep" type="range" min="0" max="10" value="5" /></label>
+                <label class="range-card"><span>🧠 Estrés</span><output id="stressValue">5</output><input id="stressInput" name="stress" type="range" min="0" max="10" value="5" /></label>
+                <label class="range-card"><span>⚠️ Dolor o molestia</span><output id="painValue">0</output><input id="painInput" name="pain" type="range" min="0" max="10" value="0" /></label>
 
-                <label class="notes-field"><span>Notas del día</span><textarea id="notesInput" rows="5" maxlength="500" placeholder="Síntomas, comidas, actividad, estrés o cualquier cambio que hayas notado..."></textarea></label>
+                <h3 class="form-section-title">Datos del día</h3>
+                <label class="field-card"><span>Horas de sueño</span><input id="sleepHoursInput" type="number" min="0" max="24" step="0.5" placeholder="Ej. 7.5" /></label>
+                <label class="field-card"><span>Peso (kg) <small>opcional</small></span><input id="weightInput" type="number" min="20" max="350" step="0.1" placeholder="Ej. 74.5" /></label>
+                <label class="field-card"><span>Actividad física (minutos)</span><input id="activityInput" type="number" min="0" max="1440" step="1" placeholder="Ej. 30" /></label>
+                <label class="field-card"><span>Localización del dolor</span><input id="painLocationInput" type="text" maxlength="100" placeholder="Ej. zona lumbar, cabeza..." /></label>
+
+                <h3 class="form-section-title">Señales corporales</h3>
+                <label class="field-card"><span>Deposiciones</span><select id="bowelInput"><option value="">Sin registrar</option><option value="normal">Normal</option><option value="estrenimiento">Estreñimiento</option><option value="diarrea">Diarrea</option><option value="irregular">Irregular</option><option value="dolor">Con dolor o molestias</option></select></label>
+                <label class="field-card"><span>Color de la orina</span><select id="urineInput"><option value="">Sin registrar</option><option value="clara">Muy clara</option><option value="amarillo-claro">Amarillo claro</option><option value="amarillo-oscuro">Amarillo oscuro</option><option value="ambar">Ámbar</option><option value="inusual">Color inusual</option></select></label>
+
+                <label class="notes-field"><span>Notas del día</span><textarea id="notesInput" rows="5" maxlength="800" placeholder="Síntomas, comidas, medicación, suplementos, actividad, estrés o cualquier cambio que hayas notado..."></textarea></label>
                 <div id="saveMessage" class="save-message" role="status"></div>
                 <button class="btn btn-primary save-button" type="submit">Guardar registro de hoy</button>
               </form>
