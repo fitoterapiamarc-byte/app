@@ -106,8 +106,8 @@ function average(records, metric) {
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
-function formatAverage(value) {
-  return value === null ? '—' : value.toFixed(1);
+function formatAverage(value, digits = 1) {
+  return value === null ? '—' : value.toFixed(digits);
 }
 
 function buildInsight(records) {
@@ -147,6 +147,94 @@ function buildInsight(records) {
 
   const direction = strongest.change > 0 ? 'ha mejorado' : 'ha bajado';
   return `${strongest.label} ${direction} aproximadamente ${Math.abs(strongest.change).toFixed(1)} puntos respecto al periodo anterior. Es una tendencia orientativa y conviene confirmarla con más días de registro.`;
+}
+
+function pearsonCorrelation(records, xKey, yKey) {
+  const pairs = records
+    .map((record) => [Number(record[xKey]), Number(record[yKey])])
+    .filter(([x, y]) => Number.isFinite(x) && Number.isFinite(y));
+
+  if (pairs.length < 4) return null;
+
+  const meanX = pairs.reduce((sum, pair) => sum + pair[0], 0) / pairs.length;
+  const meanY = pairs.reduce((sum, pair) => sum + pair[1], 0) / pairs.length;
+
+  let numerator = 0;
+  let sumSqX = 0;
+  let sumSqY = 0;
+
+  pairs.forEach(([x, y]) => {
+    const dx = x - meanX;
+    const dy = y - meanY;
+    numerator += dx * dy;
+    sumSqX += dx * dx;
+    sumSqY += dy * dy;
+  });
+
+  const denominator = Math.sqrt(sumSqX * sumSqY);
+  if (!denominator) return null;
+
+  return {
+    value: numerator / denominator,
+    count: pairs.length
+  };
+}
+
+function describeRelation(correlation, positiveText, negativeText) {
+  if (!correlation || correlation.count < 4) return null;
+
+  const strength = Math.abs(correlation.value);
+  if (strength < 0.45) return null;
+
+  return {
+    strength,
+    text: correlation.value > 0 ? positiveText : negativeText,
+    count: correlation.count
+  };
+}
+
+function buildRelations(records) {
+  const candidates = [
+    describeRelation(
+      pearsonCorrelation(records, 'sleepHours', 'energy'),
+      'Los días con más horas de sueño tienden a coincidir con más energía.',
+      'En tus registros, más horas de sueño coinciden con menos energía. Conviene observar si intervienen otros factores.'
+    ),
+    describeRelation(
+      pearsonCorrelation(records, 'sleepHours', 'stress'),
+      'En tus registros, más horas de sueño coinciden con más estrés. No implica que una cosa cause la otra.',
+      'Los días con más horas de sueño tienden a coincidir con menos estrés.'
+    ),
+    describeRelation(
+      pearsonCorrelation(records, 'activityMinutes', 'energy'),
+      'Los días con más actividad física tienden a coincidir con más energía.',
+      'Los días con más actividad física tienden a coincidir con menos energía; podría reflejar cansancio o días más exigentes.'
+    ),
+    describeRelation(
+      pearsonCorrelation(records, 'activityMinutes', 'mood'),
+      'Los días con más actividad física tienden a coincidir con mejor estado de ánimo.',
+      'Los días con más actividad física tienden a coincidir con peor estado de ánimo. Hace falta más contexto para interpretarlo.'
+    ),
+    describeRelation(
+      pearsonCorrelation(records, 'stress', 'sleep'),
+      'Cuando el estrés sube, la valoración del sueño también tiende a subir en tus registros.',
+      'Cuando el estrés sube, la calidad del sueño tiende a bajar.'
+    ),
+    describeRelation(
+      pearsonCorrelation(records, 'pain', 'mood'),
+      'Cuando aumenta el dolor, el estado de ánimo también tiende a subir en tus registros.',
+      'Cuando aumenta el dolor, el estado de ánimo tiende a bajar.'
+    ),
+    describeRelation(
+      pearsonCorrelation(records, 'pain', 'sleep'),
+      'Cuando aumenta el dolor, la calidad del sueño también tiende a subir en tus registros.',
+      'Cuando aumenta el dolor, la calidad del sueño tiende a bajar.'
+    )
+  ].filter(Boolean);
+
+  return candidates
+    .sort((a, b) => b.strength - a.strength)
+    .slice(0, 3);
 }
 
 function renderChart(records) {
@@ -192,6 +280,37 @@ function renderChart(records) {
   return `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Evolución de energía, ánimo, digestión y sueño">${horizontalLines}${lines}${labels}</svg>`;
 }
 
+function formatDateShort(dateString) {
+  const date = new Date(`${dateString}T12:00:00`);
+  return new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: '2-digit' }).format(date);
+}
+
+function formatCell(value, suffix = '') {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? `${numeric}${suffix}` : '—';
+}
+
+function renderHistory(records) {
+  const rows = records.slice(-7).reverse().map((record) => `
+    <div class="history-row">
+      <span>${formatDateShort(record.date)}</span>
+      <span>${formatCell(record.energy)}</span>
+      <span>${formatCell(record.stress)}</span>
+      <span>${formatCell(record.pain)}</span>
+      <span>${formatCell(record.sleepHours, ' h')}</span>
+      <span>${formatCell(record.activityMinutes, ' min')}</span>
+      <span>${formatCell(record.weight, ' kg')}</span>
+    </div>`).join('');
+
+  return `
+    <div class="analysis-history">
+      <div class="history-row history-head">
+        <span>Fecha</span><span>Energía</span><span>Estrés</span><span>Dolor</span><span>Sueño</span><span>Actividad</span><span>Peso</span>
+      </div>
+      ${rows}
+    </div>`;
+}
+
 function renderAnalysis() {
   const records = getSortedRecords();
 
@@ -225,19 +344,49 @@ function renderAnalysis() {
       <strong>${formatAverage(average(recent, metric.id))}</strong> <small>/10</small>
     </article>`).join('');
 
+  const extraCards = [
+    { label: 'Estrés medio', value: formatAverage(average(recent, 'stress')), suffix: '/10' },
+    { label: 'Dolor medio', value: formatAverage(average(recent, 'pain')), suffix: '/10' },
+    { label: 'Sueño medio', value: formatAverage(average(recent, 'sleepHours')), suffix: 'h' },
+    { label: 'Actividad media', value: formatAverage(average(recent, 'activityMinutes'), 0), suffix: 'min' }
+  ].map((item) => `
+    <article class="analysis-extra-card">
+      <span>${item.label}</span>
+      <strong>${item.value}</strong> <small>${item.suffix}</small>
+    </article>`).join('');
+
   const legend = analysisMetrics.map((metric) => `
     <span><i class="legend-dot" style="background:${metric.stroke}"></i>${metric.label}</span>`).join('');
 
+  const relations = buildRelations(recent);
+  const relationsHtml = relations.length
+    ? `<div class="relation-list">${relations.map((relation) => `
+        <div class="relation-item">
+          <strong>Patrón detectado</strong>
+          <span>${relation.text} Basado en ${relation.count} días comparables.</span>
+        </div>`).join('')}</div>`
+    : `<p>Por ahora no aparece una relación suficientemente clara entre sueño, actividad, estrés, dolor, energía y ánimo. Se necesitan más días comparables.</p>`;
+
   content.innerHTML = `
     <div class="analysis-summary-grid">${summaryCards}</div>
+    <div class="analysis-extra-grid">${extraCards}</div>
     <div class="analysis-chart-card">
-      <h3>Evolución</h3>
+      <h3>Evolución principal</h3>
       <div class="analysis-chart">${renderChart(recent)}</div>
       <div class="chart-legend">${legend}</div>
     </div>
     <div class="analysis-insight-card">
       <h3>Lectura de tendencia</h3>
       <p>${buildInsight(records)}</p>
+    </div>
+    <div class="analysis-relations-card">
+      <h3>Relaciones entre hábitos y señales</h3>
+      ${relationsHtml}
+      <p class="relation-note">Estas asociaciones son orientativas. Una coincidencia entre dos variables no demuestra que una sea la causa de la otra.</p>
+    </div>
+    <div class="analysis-history-card">
+      <h3>Últimos 7 registros</h3>
+      ${renderHistory(records)}
     </div>`;
 }
 
