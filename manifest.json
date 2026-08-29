@@ -1,11 +1,21 @@
 {
+  "id": "./",
   "name": "CuerpoClaro",
   "short_name": "CuerpoClaro",
-  "description": "Registro personal de señales corporales, hábitos y recomendaciones educativas.",
+  "description": "Registro personal de señales corporales, hábitos y recomendaciones educativas basadas en fuentes verificables.",
   "lang": "es",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#1f7a4d"
+  "theme_color": "#1f7a4d",
+  "categories": ["health", "lifestyle", "education"],
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }
