@@ -11,150 +11,28 @@
   flex-wrap: wrap;
 }
 
-.recommendations-heading h2 {
-  margin: 0 0 6px;
-}
-
-.recommendations-heading p {
-  margin: 0;
-  color: #667085;
-}
-
-.recommendations-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: #eef8f1;
-  color: #23613d;
-  font-size: 0.88rem;
-  font-weight: 700;
-}
-
-.recommendations-notice {
-  padding: 14px 16px;
-  border: 1px solid #f2d69a;
-  border-radius: 14px;
-  background: #fff9ea;
-  color: #6a4b12;
-  line-height: 1.5;
-}
-
-.recommendations-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 14px;
-}
-
-.recommendation-card {
-  border: 1px solid #e4e9ef;
-  border-radius: 16px;
-  background: #fff;
-  padding: 16px;
-  box-shadow: 0 6px 20px rgba(21, 35, 48, 0.05);
-}
-
-.recommendation-card.priority-high {
-  border-left: 5px solid #c54b4b;
-}
-
-.recommendation-card.priority-medium {
-  border-left: 5px solid #d89a2f;
-}
-
-.recommendation-card.priority-low {
-  border-left: 5px solid #4b9c6c;
-}
-
-.recommendation-card .rec-kicker {
-  display: block;
-  margin-bottom: 7px;
-  color: #667085;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.recommendation-card h3 {
-  margin: 0 0 8px;
-  font-size: 1.05rem;
-}
-
-.recommendation-card p {
-  margin: 0 0 10px;
-  color: #475467;
-  line-height: 1.5;
-}
-
-.recommendation-card ul {
-  margin: 0;
-  padding-left: 18px;
-  color: #344054;
-}
-
-.recommendation-card li + li {
-  margin-top: 6px;
-}
-
-.rec-section {
-  border-top: 1px solid #e8edf2;
-  padding-top: 18px;
-}
-
-.rec-section h3 {
-  margin: 0 0 10px;
-}
-
-.rec-section > p {
-  margin: 0 0 12px;
-  color: #667085;
-}
-
-.fitotherapy-card {
-  display: grid;
-  gap: 10px;
-  padding: 16px;
-  border-radius: 16px;
-  background: #f6fbf7;
-  border: 1px solid #dceee1;
-}
-
-.fitotherapy-card strong {
-  color: #245f3b;
-}
-
-.fitotherapy-card p {
-  margin: 0;
-  color: #475467;
-  line-height: 1.5;
-}
-
-.rec-empty {
-  padding: 20px;
-  border-radius: 16px;
-  border: 1px dashed #ccd5df;
-  color: #667085;
-  background: #fafbfc;
-}
-
-.rec-signals {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.rec-signal {
-  padding: 7px 10px;
-  border-radius: 999px;
-  background: #f2f4f7;
-  color: #344054;
-  font-size: 0.84rem;
-  font-weight: 700;
-}
-
-@media (max-width: 700px) {
-  .recommendations-grid {
-    grid-template-columns: 1fr;
-  }
-}
+.recommendations-heading h2 { margin: 0 0 6px; }
+.recommendations-heading p { margin: 0; color: #667085; }
+.recommendations-badge { display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;background:#eef8f1;color:#23613d;font-size:.88rem;font-weight:700; }
+.recommendations-notice { padding:14px 16px;border:1px solid #f2d69a;border-radius:14px;background:#fff9ea;color:#6a4b12;line-height:1.5; }
+.recommendations-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px; }
+.recommendation-card { border:1px solid #e4e9ef;border-radius:16px;background:#fff;padding:16px;box-shadow:0 6px 20px rgba(21,35,48,.05); }
+.recommendation-card.priority-high { border-left:5px solid #c54b4b; }
+.recommendation-card.priority-medium { border-left:5px solid #d89a2f; }
+.recommendation-card.priority-low { border-left:5px solid #4b9c6c; }
+.recommendation-card .rec-kicker { display:block;margin-bottom:7px;color:#667085;font-size:.78rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase; }
+.recommendation-card h3 { margin:0 0 8px;font-size:1.05rem; }
+.recommendation-card p { margin:0 0 10px;color:#475467;line-height:1.5; }
+.recommendation-card ul { margin:0;padding-left:18px;color:#344054; }
+.recommendation-card li+li { margin-top:6px; }
+.rec-section { border-top:1px solid #e8edf2;padding-top:18px; }
+.rec-section h3 { margin:0 0 10px; }
+.rec-section>p { margin:0 0 12px;color:#667085; }
+.fitotherapy-card { display:grid;gap:10px;padding:16px;border-radius:16px;background:#f6fbf7;border:1px solid #dceee1; }
+.fitotherapy-card strong { color:#245f3b; }
+.fitotherapy-card p { margin:0;color:#475467;line-height:1.5; }
+.rec-empty { padding:20px;border-radius:16px;border:1px dashed #ccd5df;color:#667085;background:#fafbfc; }
+.rec-signals { display:flex;gap:8px;flex-wrap:wrap; }
+.rec-signal { padding:7px 10px;border-radius:999px;background:#f2f4f7;color:#344054;font-size:.84rem;font-weight:700; }
+.nutrition-target-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}.nutrition-target-grid article{display:grid;gap:5px;padding:14px;border:1px solid #dbe5df;border-radius:13px;background:#fbfefc}.nutrition-target-grid strong{color:#235d3c}.nutrition-target-grid span{color:#475467;line-height:1.45;font-size:.92rem}.nutrition-personal{margin-top:14px;padding:15px;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0}.nutrition-personal h4{margin:0 0 8px}.nutrition-personal p,.nutrition-personal ul{margin:0;color:#475467}.nutrition-personal ul{padding-left:19px}.nutrition-personal li+li{margin-top:6px}.nutrition-sources{margin-top:12px;font-size:.86rem;color:#64748b}.nutrition-sources a{font-weight:700;color:#1d4ed8;text-decoration:none}
+@media (max-width:700px){.recommendations-grid,.nutrition-target-grid{grid-template-columns:1fr}}
