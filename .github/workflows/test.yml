@@ -1,0 +1,49 @@
+name: Validate CuerpoClaro
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate JavaScript syntax
+        run: |
+          set -e
+          for f in *.js; do
+            echo "Checking $f"
+            node --check "$f"
+          done
+
+      - name: Validate local HTML references
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          html = Path('index.html').read_text(encoding='utf-8')
+          refs = re.findall(r'(?:src|href)="([^"]+)"', html)
+          local = []
+          for ref in refs:
+              if ref.startswith(('http://', 'https://', 'mailto:', '#', 'data:')):
+                  continue
+              clean = ref.split('#', 1)[0].split('?', 1)[0].lstrip('./')
+              if clean:
+                  local.append(clean)
+
+          missing = [ref for ref in local if not Path(ref).exists()]
+          if missing:
+              raise SystemExit(f'Missing local references: {missing}')
+          print(f'OK: {len(local)} local references exist')
+          PY
+
+      - name: Validate manifest JSON
+        run: python3 -m json.tool manifest.json >/dev/null
